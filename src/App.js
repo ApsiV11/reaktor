@@ -1,25 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react'
 
-function App() {
+import gameService from './services/games'
+
+import History from './components/History'
+import LiveGames from './components/LiveGames'
+import PlayerStats from './components/PlayerStats'
+
+const App = () => {
+  const [player, setPlayer] = useState(null)
+  const [history, setHistory] = useState([])
+  const [cursor, setCursor] = useState(null)
+
+  useEffect(() => {
+    gameService.getHistory(cursor).then(games => {
+      setHistory([...history, ...games.data.data])
+      setCursor(games.data.cursor)
+    })
+  }, [cursor])
+
+  const handleLoad = (cursor) => {
+    gameService.getHistory(cursor).then(games => {
+      setHistory(history.concat(games.data.data))
+      setCursor(games.data.cursor)
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {/*<Footer text="Rock-Paper-Scissors Games" />*/}
+      <div className="divs">
+        <LiveGames choosePlayer={(playerName) => setPlayer(playerName)}/>
+        {player ? <PlayerStats name={player} games={history.filter((game) => game.playerA.name===player || game.playerB.name===player)} choosePlayer={(playerName) => setPlayer(playerName)}/> : null} {/*<History history={history} choosePlayer={(playerId) => setPlayer(playerId)}/>*/}
+      </div>
+    </>
+  )
 }
 
 export default App;
