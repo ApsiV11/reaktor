@@ -1,8 +1,11 @@
 import axios from 'axios'
 
-const getHistory = async (cursor) => {
-    const response = await axios.get(!cursor ? `/rps/history` : cursor)
-    return response
+const getHistory = async (player) => {
+  if(!player) {
+    return [];
   }
+  const response = await axios.get(`/rps/history/${player}`)
+  return response.data
+}
 
 export default {getHistory}

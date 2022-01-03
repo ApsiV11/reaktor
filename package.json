@@ -37,5 +37,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://bad-api-assignment.reaktor.com:443/"
+  "proxy": "http://localhost:8080"
 }

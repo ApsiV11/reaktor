@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import useWebSocket, {ReadyState} from 'react-use-websocket'
+import useWebSocket from 'react-use-websocket'
 
 import Game from './Game'
 
 const LiveGames = ({choosePlayer}) => {
     const [games, setGames] = useState([])
 
-    const {sendMessage, lastMessage, readyState} = useWebSocket("ws://bad-api-assignment.reaktor.com/rps/live")
+    const {sendMessage, lastMessage} = useWebSocket("ws://localhost:8080/rps/live")
+
+    //Just to inform the backend to start sending data
+    useEffect(() => {
+        sendMessage("ready")
+    }, [sendMessage])
 
     useEffect(() => {
         if(lastMessage !== null) {
-            const gameEvent = JSON.parse(JSON.parse(lastMessage.data))
+            const gameEvents = JSON.parse(lastMessage.data)
 
-            if(gameEvent.type==="GAME_BEGIN") {
-                setGames([...games, gameEvent])
-            }
-
-            else {
-                let newGames = [...games]
-                newGames = newGames.map((game) => game.gameId==gameEvent.gameId ? gameEvent : game)
-                setGames(newGames)
-
-                /*setTimeout(() => {
-                    let newGames = [...games]
-                    newGames = newGames.filter((game) => game.gameId != gameEvent.gameId)
-                    setGames(newGames)
-                }, 3000)*/
-            }
+            setGames(gameEvents.data)
         }
     }, [lastMessage])
 
