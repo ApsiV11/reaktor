@@ -3,6 +3,7 @@ import useWebSocket from 'react-use-websocket'
 
 import Game from './Game'
 
+//Component responsible for showing the active games
 const LiveGames = ({choosePlayer}) => {
     const [games, setGames] = useState([])
 

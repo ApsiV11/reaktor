@@ -4,7 +4,8 @@ const Game = ({game, choosePlayer}) => {
 
     return(
     <div key={game.gameId}>
-        <h4>Game {game.gameId}</h4>
+        <h3>Game {game.gameId}</h3>
+        <h5><strong>Result: {game.winner ? `${game.winner} wins` : "Draw"} </strong></h5>
         <div>
             <h5>Player A</h5>
             <div>

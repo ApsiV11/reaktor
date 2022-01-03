@@ -42,27 +42,8 @@ const calculateWinRatio = (player, games) => {
     let wins = 0.0
 
     games.forEach(game => {
-        if(game.playerA.name===player) {
-            if(game.playerA.played==="ROCK" && game.playerB.played==="SCISSORS") {
-                wins +=1
-            }
-            else if(game.playerA.played==="PAPER" && game.playerB.played==="ROCK") {
-                wins +=1
-            }
-            else if(game.playerA.played==="SCISSORS" && game.playerB.played==="PAPER") {
-                wins +=1
-            }
-        }
-        else {
-            if(game.playerB.played==="ROCK" && game.playerA.played==="SCISSORS") {
-                wins +=1
-            }
-            else if(game.playerB.played==="PAPER" && game.playerA.played==="ROCK") {
-                wins +=1
-            }
-            else if(game.playerB.played==="SCISSORS" && game.playerA.played==="PAPER") {
-                wins +=1
-            }
+        if(player===game.winner) {
+            wins+=1;
         }
     })
 

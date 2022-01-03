@@ -4,6 +4,7 @@ import utils from '../services/utils'
 
 import Game from './Game'
 
+//Component for showting the player info we want to show
 const PlayerStats = ({name, games, choosePlayer}) => {
 
     return(
