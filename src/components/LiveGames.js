@@ -7,7 +7,7 @@ import Game from './Game'
 const LiveGames = ({choosePlayer}) => {
     const [games, setGames] = useState([])
 
-    const {sendMessage, lastMessage} = useWebSocket(`ws://${window.location.hostname}/rps/live`)
+    const {sendMessage, lastMessage} = useWebSocket(`ws://${window.location.hostname}:8080/rps/live`)
 
     //Just to inform the backend to start sending data
     useEffect(() => {
@@ -24,27 +24,31 @@ const LiveGames = ({choosePlayer}) => {
 
     return(
         <div className="games">
-            <h2>Active Games</h2>
-            {
-                games.sort((a, b) => b.t - a.t).sort((a,b) => {
-                    if(a.type===b.type) {
-                        return 0;
-                    }
-                    else if (a.type==="GAME_BEGIN" && b.type==="GAME_RESULT") {
-                        return -1;
-                    }
-                    else {
-                        return 1;
-                    }
-                }).map(game => 
+            <div className="gameContainer">
+                <h2>Active games</h2>
+                {
+                    games.filter((game) => game.type==="GAME_BEGIN").map(game => 
 
-                    <Game
-                        key={game.gameId}
-                        game={game}
-                        choosePlayer={choosePlayer}
-                    />
-                )
-            }
+                        <Game
+                            key={game.gameId}
+                            game={game}
+                            choosePlayer={choosePlayer}
+                        />
+                    )
+                }
+            </div>
+            <div className="gameContainer">
+                <h2>Recently completed games</h2>
+                {
+                    games.filter((game) => game.type==="GAME_RESULT").map(game =>
+                        <Game
+                            key={game.gameId}
+                            game={game}
+                            choosePlayer={choosePlayer}
+                        />
+                    )
+                }
+            </div>
         </div>
     )
 }

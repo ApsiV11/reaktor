@@ -4,8 +4,15 @@ const Game = ({game, choosePlayer}) => {
 
     return(
     <div key={game.gameId}>
-        <h3>Game {game.gameId}</h3>
-        <h5><strong>Result: {game.winner ? `${game.winner} wins` : "Draw"} </strong></h5>
+        <h3>Game</h3>
+        <h3>{game.gameId}</h3>
+        {game.type==="GAME_RESULT" ?
+        <h5>
+            <strong>
+                Result: {game.winner ? `${game.winner} wins` : "Draw"}
+            </strong>
+        </h5>
+        : null}
         <div>
             <h5>Player A</h5>
             <div>

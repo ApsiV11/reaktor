@@ -17,7 +17,14 @@ code {
 }
 
 .games {
-  margin-left: 15%
+  width: 50%;
+  margin-left: 5%;
+  display: flex;
+}
+
+.gameContainer {
+  width: 50%;
+  margin-right: 5%;
 }
 
 .stats {
