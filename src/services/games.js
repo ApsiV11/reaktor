@@ -4,7 +4,7 @@ const getHistory = async (player) => {
   if(!player) {
     return [];
   }
-  const response = await axios.get(`http://${window.location.hostname}/rps/history/${player}`)
+  const response = await axios.get(`http://${window.location.hostname}:80/rps/history/${player}`)
   return response.data
 }
 
