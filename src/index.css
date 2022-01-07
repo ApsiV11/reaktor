@@ -17,17 +17,11 @@ code {
 }
 
 .games {
-  width: 50%;
-  margin-left: 5%;
   display: flex;
+  width: 73%;
+  align-content: center;
 }
 
 .gameContainer {
   width: 50%;
-  margin-right: 5%;
 }
-
-.stats {
-  margin-left: 15%;
-}
-

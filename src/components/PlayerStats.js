@@ -4,6 +4,17 @@ import utils from '../services/utils'
 
 import Game from './Game'
 
+import Button from '@mui/material/Button'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import Divider from '@mui/material/Divider'
+import Box from '@mui/material/Box'
+import Chip from '@mui/material/Chip'
+
+import ArrowBack from '@mui/icons-material/ArrowBack';
+import ArrowForward from '@mui/icons-material/ArrowForward';
+
 //Component for showting the player info we want to show
 const PlayerStats = ({name, games, choosePlayer}) => {
     const [page, setPage] = useState(0);
@@ -13,28 +24,47 @@ const PlayerStats = ({name, games, choosePlayer}) => {
     }
 
     return(
-    <div className="stats">
-        <h2>Player {name}</h2>
-        <div>
-            Win ratio: {games ? utils.calculateWinRatio(name, games) : ""}%
-        </div>
-        <div>
-            Total games: {games ? games.length : ""}
-        </div>
-        <div>
-            Most played hand: {games ? utils.calculatePlayedHand(name, games) : ""}
-        </div>
-        <h4>Player {name}'s games</h4>
-        <div>
-            {games ? games.sort((a, b) => b.t-a.t).filter((game, i) => i>=5*page && i<=5*page+4).map(game => 
-                <Game
-                key={game.gameId}
-                game={game}
-                choosePlayer={choosePlayer}
-                />
-            ) : ""}
-        </div>
-        <button onClick={() => handleClick(-1)}>&#60;</button>Page {page+1}<button onClick={() => handleClick(1)}>&#62;</button>
+    <div>
+        <h2>Stats</h2>
+        <List sx={{bgcolor: 'red', px:"10px", py:"10px", borderRadius: '10px'}}>
+            <Divider><Chip sx={{bgcolor: 'black'}} label="Player"/></Divider>
+                    <h3 align="center">{name}</h3>
+            <Divider><Chip sx={{bgcolor: 'black'}} label="Stats"/></Divider>
+            <ListItem>
+                <ListItemText>Win ratio: {games ? utils.calculateWinRatio(name, games) : ""}%</ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>Total games: {games ? games.length : ""}</ListItemText>
+            </ListItem>
+            <ListItem>
+                <ListItemText>Most played hand: {games ? utils.calculatePlayedHand(name, games) : ""}</ListItemText>
+            </ListItem>
+            <Divider><Chip sx={{bgcolor: 'black'}} label="Player's games"/></Divider>
+            <Box>
+                {games ? games.sort((a, b) => b.t-a.t).filter((game, i) => i>=5*page && i<=5*page+4).map(game => 
+                    <Game
+                    key={game.gameId}
+                    game={game}
+                    choosePlayer={choosePlayer}
+                    />
+                ) : ""}
+            </Box>
+            <ListItem>
+                <Button
+                    sx={{bgcolor: 'blue', mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
+                    onClick={() => handleClick(-1)}
+                >
+                    <ArrowBack style={{fill: "white"}}/>
+                </Button>
+                    Page {page+1}
+                <Button 
+                    sx={{bgcolor: 'blue', mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
+                    onClick={() => handleClick(1)}
+                >
+                    <ArrowForward style={{fill: "white"}}/>
+                </Button>
+            </ListItem>
+        </List>
     </div>
     )
 }

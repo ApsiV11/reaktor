@@ -1,43 +1,60 @@
 import React from 'react'
 
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import Divider from '@mui/material/Divider'
+import Chip from '@mui/material/Chip'
+
 const Game = ({game, choosePlayer}) => {
 
     return(
-    <div key={game.gameId}>
-        <h3>Game</h3>
-        <h3>{game.gameId}</h3>
+    <List key={game.gameId} sx={{my: '10px', bgcolor: 'gray', px:"10px", py:"10px", borderRadius: '10px'}}>
+        <Divider><Chip sx={{bgcolor: 'black'}} label="Game"/></Divider>
+        <ListItem>
+            <ListItemText>
+                <h3 align='center'>{game.gameId}</h3>
+            </ListItemText>
+        </ListItem>
         {game.type==="GAME_RESULT" ?
-        <h5>
-            <strong>
-                Result: {game.winner ? `${game.winner} wins` : "Draw"}
-            </strong>
-        </h5>
+        <>
+            <Divider><Chip sx={{bgcolor: 'black'}} label="Result"/></Divider>
+            <ListItem>
+                <ListItemText>
+                    <h3 align='center'>
+                        <strong>
+                            {game.winner ? `${game.winner} wins` : "Draw"}
+                        </strong>
+                    </h3>
+                </ListItemText>
+            </ListItem>
+        </>
         : null}
-        <div>
-            <h5>Player A</h5>
-            <div>
-                Name: 
-                <button onClick={() => choosePlayer(game.playerA.name)}>
-                   {game.playerA.name}
-                </button>
-            </div>
-            <div>
-                Played: {game.playerA.played}
-            </div>
-        </div>
-        <div>
-            <h5>Player B</h5>
-            <div>
-                Name: 
-                <button onClick={() => choosePlayer(game.playerB.name)}>
-                   {game.playerB.name}
-                </button>
-            </div>
-            <div>
-                Played: {game.playerB.played}
-            </div>
-        </div>
-    </div>
+        <Divider><Chip sx={{bgcolor: 'black'}} label="Player A"/></Divider>
+        <Box>
+            <Box display="flex" alignItems="center" justifyContent="center" sx={{my:"5px"}}>
+                <Button sx={{mx:"5px"}} variant="contained" onClick={() => choosePlayer(game.playerA.name)}>
+                {game.playerA.name}
+                </Button>
+            </Box>
+            <Box display="flex" alignItems="center" justifyContent="center" sx={{my:"5px"}}>
+                <strong>{game.playerA.played}</strong>
+            </Box>
+        </Box>
+        <Divider><Chip sx={{bgcolor: 'black'}} label="Player B"/></Divider>
+        <Box>
+            <Box display="flex" alignItems="center" justifyContent="center" sx={{my:"5px"}}>
+                <Button sx={{mx:"5px"}} variant="contained" onClick={() => choosePlayer(game.playerB.name)}>
+                {game.playerB.name}
+                </Button>
+            </Box>
+            <Box display="flex" alignItems="center" justifyContent="center" sx={{my:"5px"}}>
+                <strong>{game.playerB.played}</strong>
+            </Box>
+        </Box>
+    </List>
     )
 }
 
