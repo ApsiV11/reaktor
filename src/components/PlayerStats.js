@@ -36,17 +36,17 @@ const PlayerStats = ({name, games, choosePlayer}) => {
                     <h3 align="center">{name}</h3>
             <Divider><Chip sx={{bgcolor: 'black'}} label="Stats"/></Divider>
             <ListItem>
-                <ListItemText>Win ratio: {games ? `${utils.calculateWinRatio(name, games)}%` : "Loading..."}</ListItemText>
+                <ListItemText>Win ratio: {games && games.length>0 ? `${utils.calculateWinRatio(name, games)}%` : "Loading..."}</ListItemText>
             </ListItem>
             <ListItem>
-                <ListItemText>Total games: {games ? games.length : "Loading..."}</ListItemText>
+                <ListItemText>Total games: {games && games.length>0 ? games.length : "Loading..."}</ListItemText>
             </ListItem>
             <ListItem>
-                <ListItemText>Most played hand: {games ? utils.calculatePlayedHand(name, games) : "Loading..."}</ListItemText>
+                <ListItemText>Most played hand: {games && games.length>0 ? utils.calculatePlayedHand(name, games) : "Loading..."}</ListItemText>
             </ListItem>
             <Divider><Chip sx={{bgcolor: 'black'}} label="Player's games"/></Divider>
             <Box>
-                {games ? games.sort((a, b) => b.t-a.t).filter((game, i) => i>=5*page && i<=5*page+4).map(game => 
+                {games && games.length>0 ? games.sort((a, b) => b.t-a.t).filter((game, i) => i>=5*page && i<=5*page+4).map(game => 
                     <Game
                     key={game.gameId}
                     game={game}
