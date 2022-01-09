@@ -30,7 +30,7 @@ const PlayerStats = ({name, games, choosePlayer}) => {
 
     return(
     <div>
-        <h2>Stats</h2>
+        <h2 align='center'>Stats</h2>
         <List sx={{bgcolor: 'darkgray', px:"10px", py:"10px", borderRadius: '10px'}}>
             <Divider><Chip sx={{bgcolor: 'black'}} label="Player"/></Divider>
                     <h3 align="center">{name}</h3>
@@ -55,21 +55,21 @@ const PlayerStats = ({name, games, choosePlayer}) => {
                 ) : "Loading..."}
             </Box>
             <ListItem>
-                <Button
-                    sx={{bgcolor: 'blue', mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
+                <Button variant="contained"
+                    sx={{mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
                     onClick={() => handleClick(-1)}
                 >
                     <ArrowBack style={{fill: "white"}}/>
                 </Button>
                     Page {page+1}
-                <Button 
-                    sx={{bgcolor: 'blue', mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
+                <Button variant="contained"
+                    sx={{mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
                     onClick={() => handleClick(1)}
                 >
                     <ArrowForward style={{fill: "white"}}/>
                 </Button>
-                <Button 
-                    sx={{bgcolor: 'blue', mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
+                <Button variant="contained"
+                    sx={{mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
                     onClick={() => resetPage()}
                 >
                     <ClearIcon style={{fill: "white"}}/>

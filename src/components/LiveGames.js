@@ -28,7 +28,7 @@ const LiveGames = ({choosePlayer}) => {
         <div className='games'>
             <div className='gameContainer'>
                 <List sx={{mx:"8%", width: "300px"}}>
-                    <h2>Active games</h2>
+                    <h2 align='center'>Active games</h2>
                     {
                         games.filter((game) => game.type==="GAME_BEGIN").map(game => 
 
@@ -43,7 +43,7 @@ const LiveGames = ({choosePlayer}) => {
             </div>
             <div className='gameContainer'>
                 <List sx={{mx:"8%", width: "300px"}}>
-                    <h2>Recently completed games</h2>
+                    <h2 align='center'>Recently completed games</h2>
                     {
                         games.filter((game) => game.type==="GAME_RESULT").map(game =>
                             <Game
