@@ -14,6 +14,7 @@ import Chip from '@mui/material/Chip'
 
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import ArrowForward from '@mui/icons-material/ArrowForward';
+import ClearIcon from '@mui/icons-material/Clear';
 
 //Component for showting the player info we want to show
 const PlayerStats = ({name, games, choosePlayer}) => {
@@ -23,21 +24,25 @@ const PlayerStats = ({name, games, choosePlayer}) => {
         page+direction>0 ? setPage(page+direction) : setPage(0)
     }
 
+    const resetPage = () => {
+        setPage(0)
+    }
+
     return(
     <div>
         <h2>Stats</h2>
-        <List sx={{bgcolor: 'red', px:"10px", py:"10px", borderRadius: '10px'}}>
+        <List sx={{bgcolor: 'darkgray', px:"10px", py:"10px", borderRadius: '10px'}}>
             <Divider><Chip sx={{bgcolor: 'black'}} label="Player"/></Divider>
                     <h3 align="center">{name}</h3>
             <Divider><Chip sx={{bgcolor: 'black'}} label="Stats"/></Divider>
             <ListItem>
-                <ListItemText>Win ratio: {games ? utils.calculateWinRatio(name, games) : ""}%</ListItemText>
+                <ListItemText>Win ratio: {games ? `${utils.calculateWinRatio(name, games)}%` : "Loading..."}</ListItemText>
             </ListItem>
             <ListItem>
-                <ListItemText>Total games: {games ? games.length : ""}</ListItemText>
+                <ListItemText>Total games: {games ? games.length : "Loading..."}</ListItemText>
             </ListItem>
             <ListItem>
-                <ListItemText>Most played hand: {games ? utils.calculatePlayedHand(name, games) : ""}</ListItemText>
+                <ListItemText>Most played hand: {games ? utils.calculatePlayedHand(name, games) : "Loading..."}</ListItemText>
             </ListItem>
             <Divider><Chip sx={{bgcolor: 'black'}} label="Player's games"/></Divider>
             <Box>
@@ -47,7 +52,7 @@ const PlayerStats = ({name, games, choosePlayer}) => {
                     game={game}
                     choosePlayer={choosePlayer}
                     />
-                ) : ""}
+                ) : "Loading..."}
             </Box>
             <ListItem>
                 <Button
@@ -62,6 +67,12 @@ const PlayerStats = ({name, games, choosePlayer}) => {
                     onClick={() => handleClick(1)}
                 >
                     <ArrowForward style={{fill: "white"}}/>
+                </Button>
+                <Button 
+                    sx={{bgcolor: 'blue', mx:"10px", px:"1px", py:"1px", borderRadius: '5px'}} 
+                    onClick={() => resetPage()}
+                >
+                    <ClearIcon style={{fill: "white"}}/>
                 </Button>
             </ListItem>
         </List>

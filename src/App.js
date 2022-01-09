@@ -27,6 +27,7 @@ const App = () => {
 
   //useEffect loads the player game history every time the player changes.
   useEffect(() => {
+    setHistory([])
     gameService.getHistory(player).then(games => {
       setHistory(games)
     })
