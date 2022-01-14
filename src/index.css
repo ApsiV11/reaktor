@@ -16,12 +16,9 @@ code {
   display: flex;
 }
 
-.games {
-  display: flex;
-  width: 73%;
+.data {
+  width: 20%;
+  margin-left: 6.66%;
+  margin-right: 6.66%;
   align-content: center;
-}
-
-.gameContainer {
-  width: 50%;
 }
