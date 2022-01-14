@@ -9,7 +9,7 @@ import List from '@mui/material/List'
 const LiveGames = ({choosePlayer}) => {
     const [games, setGames] = useState([])
 
-    const {sendMessage, lastMessage} = useWebSocket(`ws://${window.location.hostname}:80/rps/live`)
+    const {sendMessage, lastMessage} = useWebSocket(`wss://${window.location.hostname}/rps/live`)
 
     //Just to inform the backend to start sending data
     useEffect(() => {
