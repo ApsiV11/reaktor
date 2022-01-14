@@ -27,7 +27,7 @@ const App = () => {
   const [history, setHistory] = useState([])
   const [games, setGames] = useState([])
 
-  const {sendMessage, lastMessage} = useWebSocket(`ws://${window.location.hostname}/rps/live`)
+  const {sendMessage, lastMessage} = useWebSocket(`wss://${window.location.hostname}/rps/live`)
 
   //useEffect loads the player game history every time the player changes.
   useEffect(() => {
