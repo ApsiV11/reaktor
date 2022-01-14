@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react'
 import useWebSocket from 'react-use-websocket'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import gameService from './services/games'
 
@@ -37,6 +38,9 @@ const App = () => {
     })
   }, [player])
 
+  const isMobile = useMediaQuery('(max-width: 1400px)')
+  const divClass= !isMobile ? "divs" : "divsMobile"
+
   //Just to inform the backend to start sending data
   useEffect(() => {
     sendMessage("ready")
@@ -54,7 +58,7 @@ const App = () => {
     <ThemeProvider theme={themeDark}>
       <CssBaseline />
       <Header text="Rock-Paper-Scissors Games" />
-      <div className="divs">
+      <div className={divClass}>
         <Games type="GAME_BEGIN" games={games} choosePlayer={(playerName) => setPlayer(playerName)}/>
         <Games type="GAME_RESULT" games={games} choosePlayer={(playerName) => setPlayer(playerName)}/>
         {player ? <PlayerStats name={player} games={history} choosePlayer={(playerName) => setPlayer(playerName)}/> : null}

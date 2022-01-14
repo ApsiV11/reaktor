@@ -16,6 +16,11 @@ code {
   display: flex;
 }
 
+.divsMobile {
+  width: 200%;
+  margin-left: 16.7%
+}
+
 .data {
   width: 20%;
   margin-left: 6.66%;
