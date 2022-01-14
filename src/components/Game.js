@@ -16,7 +16,7 @@ const Game = ({game, choosePlayer}) => {
     <List key={game.gameId} sx={{my: '10px', bgcolor: 'gray', px:"10px", py:"10px", borderRadius: '10px'}}>
         <Divider><Chip sx={{bgcolor: 'black'}} label="Game"/></Divider>
         <ListItem>
-            <ListItemText align='center'>
+            <ListItemText sx={{wordWrap: "break-word"}} align='center'>
                 <strong>{game.gameId}</strong>
             </ListItemText>
         </ListItem>
